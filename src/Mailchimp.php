@@ -161,15 +161,15 @@ class Mailchimp
 
             return $collection;
         } catch (ClientException $e) {
-            throw new Exception($e->getResponse()->getBody());
+            return $e->getResponse();
         } catch (RequestException $e) {
             $response = $e->getResponse();
 
             if ($response instanceof ResponseInterface) {
-                throw new Exception($e->getResponse()->getBody());
+                return $e->getResponse();
             }
 
-            throw new Exception($e->getMessage());
+            return $e->getMessage();
         }
     }
 
